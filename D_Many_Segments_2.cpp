@@ -31,14 +31,27 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    int n,m;cin>>n>>m;
+    vector<pii> a;
+    f(i,n) {
+        int x,y;cin>>x>>y;
+        a.pb({x,y});
+    }
+    int l=1,ans=0,sub=0;
+    f(i,n){
+        if(a[i].F==a[i].S){
+            sub++;
+        }
+        if(a[i].S-1<=l) continue;
+        if(a[i].S-1 >m){
+            ans += m-l;
+        }else{
+            ans += a[i].S-1-l;
+        } 
+        l=a[i].F+1; 
+    }
 
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+     cout<<ans+m-sub;
 }
 
 signed main() {

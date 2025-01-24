@@ -30,15 +30,32 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
+int n,m;
+
+int dx[]={2,1,-1,-2,-2,-1,1,2};
+int dy[]={1,2,2,1,-1,-2,-2,-1};
+
+bool check(int i,int j){
+    if(i<=0 || i>n ||j <=0 || j>n){
+        return false;
+    }
+    return true;
+}
+
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
-
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    cin>>n>>m;
+    set<pii> s;
+    while(m--){
+        int x,y;cin>>x>>y;
+        s.insert(mp(x,y));
+        f(i,8){
+            int x1=x+dx[i],y1=y+dy[i];
+            if(check(x1,y1)) {
+                s.insert(mp(x1,y1));
+            }
+        }
+    }
+    cout<<n*n -s.size();
 }
 
 signed main() {

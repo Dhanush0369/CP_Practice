@@ -31,21 +31,53 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    int n;cin>>n;
+    string s,s1,s2,ans;cin>>s;
+    vector<char> a(n);
+    a[n-1]=s[n-1];
+    rfa(i,n-2,0){
+        a[i]=min(s[i],a[i+1]);
+    }
 
 
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    f(i,n){
+        if(s1.size()==0 || s2.size()==0){
+            if(s[i] <= a[i]){
+                s1+=s[i];
+                ans+='1';
+            }else{
+                s2+=s[i];
+                ans+='2';
+            }
+        }else{
+            if(s[i]>=s2[s2.size()-1]){
+                s2+=s[i];
+                ans+='2';
+            }else{
+                s1+=s[i];
+                ans+='1';
+            }
+        }
+    }
+
+    
+    s1 = s1+s2;
+
+    fa(i,1,n){
+        if(s1[i]<s1[i-1]){
+            cout<<"-\n";
+            return;
+        }
+    }
+
+    cout<<ans<<endl;
 }
 
 signed main() {
     fast_io();
 
     int t=1;
-    // cin >> t;                           
+    cin >> t;                           
     while (t--) {
         solve();
     }

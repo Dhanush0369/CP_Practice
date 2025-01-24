@@ -31,14 +31,17 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
-
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    int n;cin>>n;
+    map<int,int> a;
+    f(i,n){
+        int x;cin>>x;
+        if(a.find(x)!=a.end()){
+            cout<<a[x]<<" ";
+        }else{
+            cout<<"-1 ";
+        }
+        a[x]=i+1;
+    }
 }
 
 signed main() {

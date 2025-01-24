@@ -31,15 +31,26 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    vector<vector<char>> a(9,vector<char>(9));
+    vi r(9),c(9);
 
+    fa(i,1,9){
+        fa(j,1,9) {
+            cin>>a[i][j];
+            if(a[i][j]=='#') {
+                r[i]++;c[j]++;
+            }
+        }
+    }
+    int ans=0;
+    fa(i,1,9){
+        fa(j,1,9) {
+            if(a[i][j]=='.' && r[i]==0 && c[j]==0) ans++;
+        }
+    }
+    cout<<ans;
 
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
-}
+}   
 
 signed main() {
     fast_io();

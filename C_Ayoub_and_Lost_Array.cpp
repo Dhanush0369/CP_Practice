@@ -31,14 +31,33 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    int n,l,r;cin>>n>>l>>r;
+    int mod = 1e9+7;
+    vi cnt(3,0);
+    vector<vector<int>> dp(n+1,vi(3,0));
+
+    cnt[0] = r/3 - (l-1)/3;
+    cnt[1] = (r+2)/3 - (l-1+2)/3 ;
+    cnt[2] = (r+1)/3 - (l-2+2)/3 ;
+
+    dp[0][0]=1;
 
 
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    f(i,n){
+        f(j,3){
+            f(k,3){
+                dp[i+1][(j+k)%3] += dp[i][j]*cnt[k];
+                dp[i+1][(j+k)%3] %= mod;
+            }
+        }
+    }
+    cout<<dp[n][0];
+    // fa(i,0,n+1){
+    //     f(j,3){
+    //         cout<<dp[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
 }
 
 signed main() {

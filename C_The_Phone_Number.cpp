@@ -30,25 +30,22 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
-void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
-
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
-}
-
+int n;
+ 
 signed main() {
-    fast_io();
-
-    int t=1;
-    // cin >> t;                           
-    while (t--) {
-        solve();
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    cin >> n;
+    int x = 1; while (x*x < n) x ++;
+    for (int i = 0; i < n; i += x) {
+        int st = i+1;
+        if (i+x > n) {
+            fa(I,i,n) {
+                cout << n+i-I << " ";   
+            }
+        } else {
+            fa(I,i,i+x) {
+                cout << st+i+x-1-I << " ";
+            }
+        }
     }
-
-    return 0;
 }

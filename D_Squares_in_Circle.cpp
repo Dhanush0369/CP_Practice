@@ -31,14 +31,19 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    int r;cin>>r;
+    int ans=1;
+    ans += (r-1)*4;
 
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    int sum=0,i=1;
+    while(r-i>0){
+        int tem = 2*(r-i)-1;
+        sum+=tem;
+        i+=2;
+    }
+    sum = sum*4;
+    ans +=sum;
+    cout<<ans;
 }
 
 signed main() {

@@ -32,13 +32,7 @@ void fast_io() {
 
 void solve(){
     string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
-
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    cout<<(s[0]-'0')* (s[2]-'0');
 }
 
 signed main() {

@@ -31,21 +31,31 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    int n,m;cin>>n>>m;
+    int x=m,y=m,currx=m,curry=m,ans1=m,ans2=m;
+    cin>>x>>y;
+    currx+=x;curry+=y;
+    n--;
+    while(n--){
+        int x1,y1;cin>>x1>>y1;
+        x +=x1;y +=y1;
+        ans1 += x+m - currx;
+        ans2 += y+m -curry; 
+        currx = x+m;
+        curry = y+m;
+    }
 
+    ans1 += ans2;
 
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    cout<<2*ans1<<endl;
+
 }
 
 signed main() {
     fast_io();
 
     int t=1;
-    // cin >> t;                           
+    cin >> t;                           
     while (t--) {
         solve();
     }

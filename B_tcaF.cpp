@@ -31,14 +31,18 @@ void fast_io() {
 }
 
 void solve(){
-    string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
+    long long x;cin>>x;
 
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    fa(i,2,1000){
+        ll pro=1;
+        for(int j=2;j<=i;j++){
+            pro*=j;
+        }
+        if(pro==x){
+            cout<<i;
+            return;
+        }
+    }
 }
 
 signed main() {

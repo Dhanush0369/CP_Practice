@@ -32,13 +32,16 @@ void fast_io() {
 
 void solve(){
     string s;cin>>s;
-    map<char,int> a;
-    f(i,3) a[s[i]]++;
-
-
-    if(a.find('A')!=a.end() && a.find('B')!=a.end() && a.find('C')!=a.end()){
-        cout<<"Yes";
-    }else cout<<"No";
+    int n=s.size();
+    s = s+s;
+    int ans=1,curr=1;
+    f(i,2*n-1){
+        if(s[i]!=s[i+1]){
+            curr++;
+            ans = max(ans,curr);
+        }else curr=1;
+    }
+    cout<<min(ans,n);
 }
 
 signed main() {
