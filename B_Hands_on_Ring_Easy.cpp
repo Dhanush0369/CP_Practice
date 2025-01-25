@@ -30,28 +30,31 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
-void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
-        }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
-    }
+int num(int n,int from,int ng,int to){
+    if(from>to) swap(from,to);
 
-     cout<<ans+m-sub;
+    if(from<ng && ng<to){
+        return n+from-to;
+    }else return to-from;
+}
+
+void solve(){
+    int n,q;
+    cin>>n>>q;
+    int ans=0,l=1,r=2;
+    f(i,q){
+        char d;int t;cin>>d>>t;
+        if(d=='L'){
+            ans+= num(n,l,r,t);
+            l=t;
+        }else{
+            ans+= num(n,r,l,t);
+            r=t;
+        }
+        
+
+    }
+    cout<<ans;
 }
 
 signed main() {

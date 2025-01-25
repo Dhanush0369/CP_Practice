@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-
-#define ll long long                    
+                  
 #define pb push_back                    
 #define mp make_pair                     
 #define all(v) v.begin(), v.end()        
@@ -14,7 +13,6 @@ using namespace std;
 #define f(i, a) for (int i = 0; i< a; i++)
 #define fa(i, a, b) for (int i = a; i < b; i++)          
 #define rfa(i, a, b) for (int i = a; i >= b; i--)       
-#define fv(v,a) for(auto v:a)
 
 // Shortcuts for common containers
 #define vi vector<int>                            
@@ -31,27 +29,36 @@ void fast_io() {
 }
 
 void solve(){
-    int n,m;cin>>n>>m;
+    int n,q;cin>>n>>q;
     vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
+    a.pb({0,0});
+    rfa(i,n,1){
+        a.pb(mp(i,0));
     }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
+    int z=1,y=0;
+    while(q--){
+        int x;cin>>x;
+        if(x==1){
+            char d;cin>>d;
+            if(d=='U'){
+                y++;
+            }else if(d=='D'){
+                y--;
+            }else if(d=='L'){
+                z--;
+            }else{
+                z++;
+            }
+            a.pb(mp(z,y));
         }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
+            int y;cin>>y;
+            int pos = a.size()-y;
+            cout<<a[pos].F<<" "<<a[pos].S<<endl;
+        }
     }
-
-     cout<<ans+m-sub;
+    // for(auto v:a){
+    //     cout<<v.F<<" "<<v.S<<endl;
+    // }
 }
 
 signed main() {

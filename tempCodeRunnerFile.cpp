@@ -31,27 +31,49 @@ void fast_io() {
 }
 
 void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
+    int n,q;
+    cin>>n>>q;
+    int ans=0,l=1,r=2;
+    f(i,q){
+        char d;int t;cin>>d>>t;
+        if(d=='L'){
+            if(l<r){
+                f(i,110){
+                    if(l==t) break;
+                    ans++;
+                    l--;
+                    if(l==0) l=n;
+                }
+            }else{
+                f(i,110){
+                    if(l==t) break;
+                    ans++;
+                    l++;
+                    if(l==n+1) l=0;
+                }
+            }
+            // cout<<ans<<endl;
         }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
-    }
+            if(l<r){
+                f(i,110){
+                    if(r==t) break;
+                    ans++;
+                    r++;
+                    if(r==n+1) r=0;
+                }
+            }else{
+                f(i,110){
+                    if(r==t) break;
+                    ans++;
+                    r--;
+                    if(r==0) r=n;
+                }
+            }
+            // cout<<ans<<endl;
+        }
 
-     cout<<ans+m-sub;
+    }
+    cout<<ans;
 }
 
 signed main() {

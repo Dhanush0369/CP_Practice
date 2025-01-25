@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-
-#define ll long long                    
+                  
 #define pb push_back                    
 #define mp make_pair                     
 #define all(v) v.begin(), v.end()        
@@ -14,7 +13,6 @@ using namespace std;
 #define f(i, a) for (int i = 0; i< a; i++)
 #define fa(i, a, b) for (int i = a; i < b; i++)          
 #define rfa(i, a, b) for (int i = a; i >= b; i--)       
-#define fv(v,a) for(auto v:a)
 
 // Shortcuts for common containers
 #define vi vector<int>                            
@@ -30,38 +28,57 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
-void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
-        }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
-    }
+int n,m;
+vector<vi> g;
+vi a;
+int ans=0;
 
-     cout<<ans+m-sub;
+void dfs(int node,set<int>& s,int last,vector<int>& vis){
+    
+    s.insert(last);
+    
+    if(node==n){
+        int sz=s.size();
+        ans = max(ans,sz);
+        return;
+    }
+    vis[node]=1;
+
+    for(auto v:g[node]){
+        
+        if(!vis[v] && a[v]>last){
+            // cout<<node<<" "<<v<<endl;
+            dfs(v,s,a[v],vis);
+        }
+    }
+    vis[node]=0;
+    s.erase(last);
+    return;
 }
+
 
 signed main() {
     fast_io();
+    cin>>n>>m;
+    g.resize(n+1);
+    a.resize(n+1);
 
-    int t=1;
-    // cin >> t;                           
-    while (t--) {
-        solve();
+    fa(i,1,n+1){
+        cin>>a[i];
     }
+    
+    f(i,m){
+        int a,b;cin>>a>>b;
+        g[a].pb(b);
+        g[b].pb(a);
+    }
+
+    vector<int> vis(n + 1, 0);
+    set<int> s;
+
+    dfs(1,s,a[1],vis);
+
+    cout<<ans;
 
     return 0;
 }

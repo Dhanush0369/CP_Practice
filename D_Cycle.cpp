@@ -30,38 +30,47 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
-void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
-        }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
-    }
 
-     cout<<ans+m-sub;
-}
 
 signed main() {
     fast_io();
 
-    int t=1;
-    // cin >> t;                           
-    while (t--) {
-        solve();
+    int n,t;cin>>n>>t;
+    vector<vi> g(n+1);
+    vi exist(n+1),dis(n+1,1e9),vis(n+1);
+
+    f(i,t){
+        int a,b;cin>>a>>b;
+        g[a].pb(b);
+        if(b==1) exist[a]=1;
     }
+
+    queue<int> q;
+    q.push(1);
+    dis[1]=0;
+    vis[1]=1;
+    while(!q.empty()){
+        int node =q.front();q.pop();
+        for(auto v:g[node]){
+            if(!vis[v]) {
+                q.push(v);
+            dis[v]=min(dis[v],1+dis[node]);
+            vis[v]=1;
+            }
+            
+        }
+    }
+
+    int ans=1e9;
+
+    fa(i,2,n+1){
+        if(dis[i]!=1e9){
+            if(exist[i]){
+                ans = min(ans,1+dis[i]);
+            }
+        }
+    }
+    cout<<((ans!=1e9) ? to_string(ans):"-1");
 
     return 0;
 }

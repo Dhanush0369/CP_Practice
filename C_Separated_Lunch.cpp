@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-
-#define ll long long                    
+                  
 #define pb push_back                    
 #define mp make_pair                     
 #define all(v) v.begin(), v.end()        
@@ -14,7 +13,6 @@ using namespace std;
 #define f(i, a) for (int i = 0; i< a; i++)
 #define fa(i, a, b) for (int i = a; i < b; i++)          
 #define rfa(i, a, b) for (int i = a; i >= b; i--)       
-#define fv(v,a) for(auto v:a)
 
 // Shortcuts for common containers
 #define vi vector<int>                            
@@ -30,38 +28,34 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
-void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
+int n,sum=0;
+vi a;
+
+int rec(int i,vi v){
+    if(i==n){
+        int sum1=0;
+        for(auto x:v){
+            sum1+=a[x];
         }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
-        }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
+        return max(sum1,sum-sum1);
     }
 
-     cout<<ans+m-sub;
+    int ans=rec(i+1,v);
+    v.pb(i);
+    ans = min(ans,rec(i+1,v));
+
+    return ans;
 }
 
 signed main() {
     fast_io();
 
-    int t=1;
-    // cin >> t;                           
-    while (t--) {
-        solve();
+    cin>>n;
+    a.resize(n);
+    f(i,n){
+         cin>>a[i];
+         sum+=a[i];
     }
-
+    cout<<rec(0,{});
     return 0;
 }

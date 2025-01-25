@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-
-#define ll long long                    
+                  
 #define pb push_back                    
 #define mp make_pair                     
 #define all(v) v.begin(), v.end()        
@@ -14,7 +13,6 @@ using namespace std;
 #define f(i, a) for (int i = 0; i< a; i++)
 #define fa(i, a, b) for (int i = a; i < b; i++)          
 #define rfa(i, a, b) for (int i = a; i >= b; i--)       
-#define fv(v,a) for(auto v:a)
 
 // Shortcuts for common containers
 #define vi vector<int>                            
@@ -31,27 +29,9 @@ void fast_io() {
 }
 
 void solve(){
-    int n,m;cin>>n>>m;
-    vector<pii> a;
-    f(i,n) {
-        int x,y;cin>>x>>y;
-        a.pb({x,y});
-    }
-    int l=1,ans=0,sub=0;
-    f(i,n){
-        if(a[i].F==a[i].S){
-            sub++;
-        }
-        if(a[i].S-1<=l) continue;
-        if(a[i].S-1 >m){
-            ans += m-l;
-        }else{
-            ans += a[i].S-1-l;
-        } 
-        l=a[i].S+1; 
-    }
-
-     cout<<ans+m-sub;
+    string s;cin>>s;
+    s[s.size()-1]='4';
+    cout<<s;
 }
 
 signed main() {

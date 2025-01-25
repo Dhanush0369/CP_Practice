@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
-
-#define ll long long                    
+                  
 #define pb push_back                    
 #define mp make_pair                     
 #define all(v) v.begin(), v.end()        
@@ -14,7 +13,6 @@ using namespace std;
 #define f(i, a) for (int i = 0; i< a; i++)
 #define fa(i, a, b) for (int i = a; i < b; i++)          
 #define rfa(i, a, b) for (int i = a; i >= b; i--)       
-#define fv(v,a) for(auto v:a)
 
 // Shortcuts for common containers
 #define vi vector<int>                            
