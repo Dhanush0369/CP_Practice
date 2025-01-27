@@ -31,8 +31,31 @@ void fast_io() {
 
 signed main() {
     fast_io();
+    int n=5,cnt=0;
+    vi a(n),v(n);
 
+    f(i,n) {
+        cin>>a[i];
+        v[i]=i+1;
+    }
     
+    f(i,n-1){
+        swap(a[i],a[i+1]);
+        bool ok=true;
+        f(j,n){
+            if(a[j]!=v[j]){
+                ok=false;
+                break;
+            }
+        }
+        if(ok){
+            cout<<"Yes";
+            return 0;
+        }
+        swap(a[i],a[i+1]);
+    }
+
+    cout<<"No";
 
     return 0;
 }

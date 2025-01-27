@@ -31,8 +31,33 @@ void fast_io() {
 
 signed main() {
     fast_io();
+    int n,m;cin>>n>>m;
+    vector<string> a(n);
 
-    
+    f(i,n){
+        cin>>a[i];
+    }
+    int x1=INT_MAX,y1=INT_MAX,x2=INT_MIN,y2=INT_MIN;
+    f(i,n){
+        f(j,m){
+            if(a[i][j]=='#'){
+                x1=min(x1,i);
+                y1=min(y1,j);
+                x2=max(x2,i);
+                y2=max(y2,j);
+            }
+        }
+    }
+    int cnt=0;
+    for(int i=x1;i<=x2;i++){
+        for(int j=y1;j<=y2;j++){
+            if(a[i][j]!='.') cnt++;
+        }
+    }
+
+    if(cnt==((x2-x1+1)*(y2-y1+1))){
+        cout<<"Yes";
+    }else cout<<"No";
 
     return 0;
 }

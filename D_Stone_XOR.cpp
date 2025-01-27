@@ -29,10 +29,46 @@ void fast_io() {
 }
 
 
+int n;
+vi arr;
+set<int> ans;
+
+void rec(int i,vector<int>& a){
+    if(i==n) return;
+
+    int tem=a[0];
+
+    fa(j,1,n){
+        tem^=a[j];
+        
+    }
+    ans.insert(tem);
+
+    rec(i+1,a);
+    
+    f(j,n){
+        int add=a[i];
+        if(j!=i){
+            a[j]+=add;
+            a[i]-=add;
+            rec(i+1,a);
+            a[j]-=add;
+            a[i]+=add;
+        }
+    }
+}
+
 signed main() {
     fast_io();
-
     
+    cin>>n;
+    arr.resize(n);
 
+    f(i,n) cin>>arr[i];
+
+    rec(0,arr);
+
+
+    cout<<ans.size();
     return 0;
 }

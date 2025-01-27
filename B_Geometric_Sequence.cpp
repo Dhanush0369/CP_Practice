@@ -28,10 +28,39 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
+int n;
+
+bool check(vi a){
+
+    fa(i,1,n-1){
+        if(a[i]*a[i] != a[i-1]*a[i+1]){
+            return false;
+        }
+    }
+    return true;
+}
+
 
 signed main() {
     fast_io();
+    cin>>n;
+    if(n==2){
+        cout<<"Yes";
+        return 0;
+    }
 
+    vi a(n);
+
+    f(i,n) {
+        cin>>a[i];
+    }
+
+    
+    if(check(a)){
+        cout<<"Yes";
+    }else{
+        cout<<"No";
+    }
     
 
     return 0;
