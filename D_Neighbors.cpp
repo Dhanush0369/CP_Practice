@@ -28,56 +28,58 @@ void fast_io() {
     cin.tie(nullptr);
 }
 
+vector<vi> g;
+vi vis;
+
+bool dfs(int node,int par){
+    vis[node]=1;
+
+    for(auto v:g[node]){
+        if(v==par) continue;
+        if(!vis[v]){
+            if(dfs(v,node)){
+                return true;
+            }
+        }else return true;
+    }
+    return false;
+}
+
 
 signed main() {
     fast_io();
-    int n,m;
-    cin>>n>>m;
-    vector<vector<pii>> g(n+1);
-    vi dp(n+1),cost(n+1);
+    int n,q;cin>>n>>q;
+    g.resize(n+1);
+    vis.resize(n+1);
 
-    fa(i,1,n+1){
-        cin>>cost[i];
-    }
-    
-    f(i,m){
+    f(i,q){
         int a,b;cin>>a>>b;
-        if(cost[a]>cost[b]){
-            g[b].pb(mp(a,1));
-        }else if(cost[a]<cost[b]){
-            g[a].pb(mp(b,1));
-        }else{
-            if(a<b) swap(a,b);
-            g[b].pb(mp(a,0));
-        }
+        if(a==b) continue;
+
+        g[a].pb(b);
+        g[b].pb(a);
     }
 
     
-
-    queue<int> q;
-
-    q.push(1);
-    dp[1]=1;
-    while(!q.empty()){
-        int ele = q.front();q.pop();
-
-        for(auto v:g[ele]){
-            dp[v.F]=max(dp[v.F],dp[ele]+v.S);
-            q.push(v.F);
+    for(int i=1;i<=n;i++){
+        if(g[i].size()>=3){
+            cout<<"No";
+            return 0;
         }
     }
 
-    // for(int i=1;i<=n;i++){
-    //     for(auto v:g[i]){
-    //         cout<<i<<" "<<v.F<<" "<<v.S<<endl;
-    //     }
 
-    // }
 
-    // for(int i=1;i<=n;i++) cout<<dp[i]<<" ";
-    // cout<<endl;
+    for(int i=1;i<=n;i++){
+        if(!vis[i]){
+            if(dfs(i,0)){
+                cout<<"No";
+                return 0;
+            }
+        }
+    }
 
-    cout<<dp[n];
+    cout<<"Yes";
 
     return 0;
 }

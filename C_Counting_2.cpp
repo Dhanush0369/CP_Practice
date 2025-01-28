@@ -31,53 +31,19 @@ void fast_io() {
 
 signed main() {
     fast_io();
-    int n,m;
-    cin>>n>>m;
-    vector<vector<pii>> g(n+1);
-    vi dp(n+1),cost(n+1);
 
-    fa(i,1,n+1){
-        cin>>cost[i];
+    int n,q;cin>>n>>q;
+
+    vi a(n);
+    f(i,n) cin>>a[i];
+
+    sort(all(a));
+
+    f(i,q){
+        int x;cin>>x;
+        auto it = lower_bound(all(a),x)-a.begin();
+        cout<<n-it<<endl;
     }
-    
-    f(i,m){
-        int a,b;cin>>a>>b;
-        if(cost[a]>cost[b]){
-            g[b].pb(mp(a,1));
-        }else if(cost[a]<cost[b]){
-            g[a].pb(mp(b,1));
-        }else{
-            if(a<b) swap(a,b);
-            g[b].pb(mp(a,0));
-        }
-    }
-
-    
-
-    queue<int> q;
-
-    q.push(1);
-    dp[1]=1;
-    while(!q.empty()){
-        int ele = q.front();q.pop();
-
-        for(auto v:g[ele]){
-            dp[v.F]=max(dp[v.F],dp[ele]+v.S);
-            q.push(v.F);
-        }
-    }
-
-    // for(int i=1;i<=n;i++){
-    //     for(auto v:g[i]){
-    //         cout<<i<<" "<<v.F<<" "<<v.S<<endl;
-    //     }
-
-    // }
-
-    // for(int i=1;i<=n;i++) cout<<dp[i]<<" ";
-    // cout<<endl;
-
-    cout<<dp[n];
 
     return 0;
 }

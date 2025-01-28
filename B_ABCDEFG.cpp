@@ -31,53 +31,26 @@ void fast_io() {
 
 signed main() {
     fast_io();
-    int n,m;
-    cin>>n>>m;
-    vector<vector<pii>> g(n+1);
-    vi dp(n+1),cost(n+1);
+    vector<char> a(50);
 
-    fa(i,1,n+1){
-        cin>>cost[i];
-    }
-    
-    f(i,m){
-        int a,b;cin>>a>>b;
-        if(cost[a]>cost[b]){
-            g[b].pb(mp(a,1));
-        }else if(cost[a]<cost[b]){
-            g[a].pb(mp(b,1));
-        }else{
-            if(a<b) swap(a,b);
-            g[b].pb(mp(a,0));
+    a[0]='A';
+    a[3]='B';
+    a[4]='C';
+    a[8]='D';
+    a[9]='E';
+    a[14]='F';
+    a[23]='G';
+
+    char st,en;
+    cin>>st>>en;
+    int p1,p2;
+
+    f(i,25){
+        if(a[i]==st) p1=i;
+        if(a[i]==en) {
+            p2=i;
         }
     }
-
-    
-
-    queue<int> q;
-
-    q.push(1);
-    dp[1]=1;
-    while(!q.empty()){
-        int ele = q.front();q.pop();
-
-        for(auto v:g[ele]){
-            dp[v.F]=max(dp[v.F],dp[ele]+v.S);
-            q.push(v.F);
-        }
-    }
-
-    // for(int i=1;i<=n;i++){
-    //     for(auto v:g[i]){
-    //         cout<<i<<" "<<v.F<<" "<<v.S<<endl;
-    //     }
-
-    // }
-
-    // for(int i=1;i<=n;i++) cout<<dp[i]<<" ";
-    // cout<<endl;
-
-    cout<<dp[n];
-
-    return 0;
+    cout<<abs(p2-p1);
+    return 0;   
 }
